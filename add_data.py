@@ -15,7 +15,6 @@ scand = Cuisine.objects.get_or_create(name="Скандинавская")[0]
 # Категории напитков
 hot = DrinkCategory.objects.get_or_create(name="Горячие")[0]
 cold = DrinkCategory.objects.get_or_create(name="Холодные")[0]
-coffee = DrinkCategory.objects.get_or_create(name="Кофейные")[0]
 sugarfree = DrinkCategory.objects.get_or_create(name="Без сахара")[0]
 
 # Блюда
@@ -75,12 +74,6 @@ Drink.objects.get_or_create(name="Холодный чай", category=cold, ingre
 Drink.objects.get_or_create(name="Морс", category=cold, ingredients="вода, ягоды, сахар")
 Drink.objects.get_or_create(name="Компот", category=cold, ingredients="вода, фрукты, сахар")
 Drink.objects.get_or_create(name="Айс латте", category=cold, ingredients="молоко, кофе, лед")
-
-Drink.objects.get_or_create(name="Эспрессо", category=coffee, ingredients="кофе")
-Drink.objects.get_or_create(name="Американо", category=coffee, ingredients="кофе, вода")
-Drink.objects.get_or_create(name="Капучино", category=coffee, ingredients="кофе, молоко, пена")
-Drink.objects.get_or_create(name="Латте", category=coffee, ingredients="кофе, молоко")
-Drink.objects.get_or_create(name="Мокко", category=coffee, ingredients="кофе, молоко, шоколад")
 
 Drink.objects.get_or_create(name="Зеленый чай", category=sugarfree, ingredients="вода, зеленый чай")
 Drink.objects.get_or_create(name="Черный кофе", category=sugarfree, ingredients="кофе, вода")
