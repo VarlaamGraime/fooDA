@@ -21,9 +21,12 @@ def random_combo(request):
         dish = random.choice(dishes)
         drink = random.choice(drinks)
 
+        print("🍽️ Блюдо:", dish.name)
+        print("🥤 Напиток:", drink.name)
+
         return JsonResponse({
             'dish': {
-                'name': dish.name,
+                'name': dish.name,  
                 'cuisine': dish.cuisine.name,
                 'ingredients': dish.ingredients
             },
