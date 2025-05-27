@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = 'django-insecure-85%-66u=w$qr7d!!)8icv*6h%^%@i7^!r8qrjlju_ez$wh2g)y'
