@@ -24,21 +24,29 @@ def random_combo(request):
         print("🍽️ Блюдо:", dish.name)
         print("🥤 Напиток:", drink.name)
 
+        cuisine_name = dish.cuisine.name if dish.cuisine else '❌ нет кухни'
+        drink_cat = drink.category.name if drink.category else '❌ нет категории'
+
+        print("🍽️ Кухня:", cuisine_name)
+        print("🥤 Категория:", drink_cat)
+
         return JsonResponse({
             'dish': {
-                'name': dish.name,  
-                'cuisine': dish.cuisine.name,
+                'name': dish.name,
+                'cuisine': cuisine_name,
                 'ingredients': dish.ingredients
             },
             'drink': {
                 'name': drink.name,
-                'category': drink.category.name,
+                'category': drink_cat,
                 'ingredients': drink.ingredients
             }
         })
 
     except Exception as e:
+        print("Ошибка в random_combo:", e)
         return JsonResponse({'error': str(e)}, status=500)
+
  
 @csrf_exempt
 def random_combo_filtered(request):
