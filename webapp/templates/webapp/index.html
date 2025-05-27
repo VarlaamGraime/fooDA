@@ -1,0 +1,196 @@
+{% load static %}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'webapp/style.css' %}">
+
+    <title>fooDA</title>
+</head>
+<body>
+    <header></header>
+    <main class="section">
+        <div class="main-container">
+            <div class="position-container">
+                <div class="start-menu">
+                    <h2>Выбери подходящий вариант</h2>
+
+                    <button class="main-button" id="get-combo">Поиск</button>
+                    <div id="result"></div>
+                      <details class="but-detalis">
+                        <summary class="but-summary"><span class="summary-label">Добавить исключения</span></summary>
+                        <p>Здесь вы можете предвыбрать некоторые пункты:</p>
+                    <div class="dropdown--center">
+                      <div class="dropdown">
+                        <details class="multi-select">
+                          <summary><span class="summary-label">Выберите кухню, которую хотите исключить:</span></summary>
+                          <div class="options">
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Русская">Русская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Итальянская">Итальянская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Средиземноморская">Средиземноморская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Американская">Американская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Французская">Французская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Скандинавская">Скандинавская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Азиатская">Азиатская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Мексиканская">Мексиканская</label>
+                            <label><input type="checkbox" class="cuisine-checkbox" value="Индийская">Индийская</label>
+                          </div>
+                        </details>
+                      </div>
+
+                      <div class="dropdown">
+                        <details class="multi-select">
+                          <summary><span class="summary-label">Выберите еду, которую хотите исключить:</span></summary>
+                          <input type="text" id="ingredient-search" placeholder="Поиск..." class="search-box">
+                          <div class="options" id="ingredient-options">
+                            <label><input type="checkbox" class="ingredient-checkbox" value="бекон">бекон</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="ветчина">ветчина</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="грибы">грибы</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="кабачки">кабачки</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="корица">корица</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="курица">курица</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="лосось">лосось</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="рыба">рыба</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="сыр">сыр</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="чили">чили</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="молоко">молоко</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="майонез">майонез</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="мука">мука</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="мясо">мясо</label>
+                            <label><input type="checkbox" class="ingredient-checkbox" value="чили">чили</label>
+                          </div>
+                        </details>
+                      </div>
+
+                       <div class="dropdown">
+                        <details class="multi-select">
+                          <summary><span class="summary-label">Выберите напитки, которые хотите исключить:</span></summary>
+                          <div class="options">
+                            <label><input type="checkbox" class="drink-category-checkbox" value="Горячие">Горячие напитки</label>
+                            <label><input type="checkbox" class="drink-category-checkbox" value="Холодные">Холодные напитки </label>
+                            <label><input type="checkbox" class="drink-category-checkbox" value="Без сахара">Без сахара</label>
+                            <label><input type="checkbox" class="drink-category-checkbox" value="Кофейные">Кофейные</label>
+                          </div> 
+                        </details>
+                      </div>
+                      <button class="main-button" id="get-combo-exc">Поиск с исключениями</button>
+                      </details>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function () {
+
+  $('.multi-select').each(function () {
+    const $dropdown = $(this);
+    const $summaryLabel = $dropdown.find('.summary-label');
+    const $checkboxes = $dropdown.find('input[type="checkbox"]');
+    const defaultText = $summaryLabel.text();
+
+    $checkboxes.on('change', function () {
+      const checked = $checkboxes.filter(':checked');
+      if (checked.length === 0) {
+        $summaryLabel.text(defaultText);
+      } else {
+        const selectedLabels = checked.map(function () {
+          return $(this).parent().text().trim();
+        }).get();
+        $summaryLabel.text('Выбрано: ' + selectedLabels.join(', '));
+      }
+    });
+  });
+
+  $('#get-combo').click(function () {
+    $.get('/api/random-combo/', function (data) {
+      $('#result').html(
+        `<h3>Блюдо: ${data.dish.name} (${data.dish.cuisine})</h3>
+         <p>Состав: ${data.dish.ingredients}</p>
+         <h3>Напиток: ${data.drink.name} (${data.drink.category})</h3>
+         <p>Состав: ${data.drink.ingredients}</p>`
+      );
+    });
+  });
+
+});
+
+ function getExcludedCuisines() {
+    let excluded = [];
+    $('.multi-select input[type="checkbox"]:checked').each(function () {
+      excluded.push($(this).val());
+    });
+    console.log("Исключённые кухни:", excluded);
+    return excluded;
+  }
+
+function getCheckedValues(selector) {
+  let result = [];
+  $(selector).each(function () {
+    result.push($(this).val());
+  });
+  return result;
+}
+
+function collectFilters() {
+  return {
+    exclude_cuisines: getCheckedValues('.cuisine-checkbox:checked'),
+    exclude_ingredients: getCheckedValues('.ingredient-checkbox:checked'),
+    exclude_drink_categories: getCheckedValues('.drink-category-checkbox:checked'),
+  };
+}
+
+// 🔹 Поиск без фильтров
+$('#get-combo').click(function () {
+  $.get('/api/random-combo/', function (data) {
+    $('#result').html(
+      `<h3>Блюдо: ${data.dish.name} (${data.dish.cuisine})</h3>
+       <p>Состав: ${data.dish.ingredients}</p>
+       <h3>Напиток: ${data.drink.name} (${data.drink.category})</h3>
+       <p>Состав: ${data.drink.ingredients}</p>`
+    );
+  }).fail(function () {
+    $('#result').html('<p style="color:red;">Ошибка при получении случайного блюда</p>');
+  });
+});
+
+$('#get-combo-exc').click(function () {
+  const filters = collectFilters();
+
+  $.ajax({
+    url: '/api/random-combo-filtered/',
+    method: 'POST',
+    data: JSON.stringify(filters),
+    contentType: 'application/json',
+    success: function (data) {
+      $('#result').html(
+        `<h3>Блюдо: ${data.dish.name} (${data.dish.cuisine})</h3>
+         <p>Состав: ${data.dish.ingredients}</p>
+         <h3>Напиток: ${data.drink.name} (${data.drink.category})</h3>
+         <p>Состав: ${data.drink.ingredients}</p>`
+      );
+    },
+    error: function (xhr) {
+      const err = xhr.responseJSON?.error || 'Ошибка';
+      $('#result').html(`<p style="color:red;">${err}</p>`);
+    }
+  });
+});
+
+ $('#ingredient-search').on('input', function () {
+    const search = $(this).val().toLowerCase();
+    $('#ingredient-options label').each(function () {
+      const text = $(this).text().toLowerCase();
+      if (text.includes(search)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.env
+*.sqlite3
+*.log
+
+# Django
+db.sqlite3
+*.pyc
+.env
+/staticfiles/
+
+# Virtualenv
+venv/
+env/
+ENV/
+*.egg-info/
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# Node (если вдруг есть)
+node_modules/
+
+# Media / user uploads
+/media/
+
+# System
+.DS_Store
+Thumbs.db

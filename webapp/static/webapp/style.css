@@ -1,0 +1,206 @@
+*::before,
+*::after {
+  box-sizing: border-box;
+  line-height: normal;
+}
+
+:root {
+   font-size: 62.5%;
+   line-height: 2.4rem;
+   text-decoration: none;
+   text-align: start;
+ 
+   /* основные цвета */
+   --main-color-line: rgb(36, 4, 32);
+   --add-color-line: rgb(236, 203, 94);
+   --hover-color-line: rgba(233, 87, 30, 0.575);
+
+   /* Фоновые цвета */
+   --background-color: rgba(23, 22, 30, 1);
+ 
+   /* Тексты */ 
+   --main-text-color: #18162D;
+ 
+ }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p ,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+picture {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+a {
+  padding: 0;
+  color: currentColor;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+summary::marker {
+  display: none;
+}
+
+section {
+  position: relative;
+}
+
+.main-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.position-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-menu{
+  display: flex;
+  flex-direction: column;
+  width: 70rem;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  border-radius: 1rem;
+  border: 0.2rem solid var(--main-color-line);
+}
+
+.main-button{
+  width: 32rem;
+  height: 4rem;
+  border: 0.1rem solid rgb(58, 5, 8);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;;
+  font-size: medium;
+  transition: linear 0.5s;
+  background-color: var(--add-color-line) ;
+}
+
+.main-button:hover{
+  background-color: var(--hover-color-line);
+  scale: 1.1;
+
+}
+
+.but-summary{
+  width: 32rem;
+  height: 4rem;
+  border: 0.1rem solid rgb(58, 5, 8);
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: medium;
+  transition: linear 0.5s;
+  background-color: var(--add-color-line) ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.but-summary:hover{
+  background-color: var(--hover-color-line);
+  scale: 1.1;
+}
+
+
+.but-detalis{
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.but-detalis[open]{
+  border-color: #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 1rem 0rem;
+}
+
+
+/* Выбор с чекбоксами */
+
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .dropdown {
+      width: 260px;
+      margin-bottom: 20px;
+    }
+
+    details {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px;
+      background-color: #f8f9ff;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-label {
+      display: inline-block;
+    }
+
+    .options {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: auto;
+      max-height: 15rem;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .dropdown--center{
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+ 
