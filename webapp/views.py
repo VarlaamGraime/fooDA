@@ -12,6 +12,9 @@ def random_combo(request):
         dishes = list(Dish.objects.all())
         drinks = list(Drink.objects.all())
 
+        print("💡 Всего блюд:", len(dishes))
+        print("💡 Всего напитков:", len(drinks))
+
         if not dishes or not drinks:
             return JsonResponse({'error': 'Нет блюд или напитков в базе'}, status=400)
 
