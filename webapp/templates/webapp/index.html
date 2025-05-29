@@ -103,16 +103,16 @@ $(document).ready(function () {
     });
   });
 
-  $('#get-combo').click(function () {
-    $.get('/api/random-combo/', function (data) {
-      $('#result').html(
-        `<h3>Блюдо: ${data.dish.name} (${data.dish.cuisine})</h3>
-         <p>Состав: ${data.dish.ingredients}</p>
-         <h3>Напиток: ${data.drink.name} (${data.drink.category})</h3>
-         <p>Состав: ${data.drink.ingredients}</p>`
-      );
-    });
-  });
+  // $('#get-combo').click(function () {
+  //   $.get('/api/random-combo/', function (data) {
+  //     $('#result').html(
+  //       `<h3>Блюдо: ${data.dish.name} (${data.dish.cuisine})</h3>
+  //        <p>Состав: ${data.dish.ingredients}</p>
+  //        <h3>Напиток: ${data.drink.name} (${data.drink.category})</h3>
+  //        <p>Состав: ${data.drink.ingredients}</p>`
+  //     );
+  //   });
+  // });
 
 });
 
